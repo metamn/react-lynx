@@ -22,6 +22,11 @@ const Container = styled.div`
 	border: 1px solid;
 	padding: 1.25em;
 	margin: 1.25em;
+
+	width: ${props => props.width ? props.width : 'auto'};
+	height: ${props => props.height ? props.height : 'auto'};
+
+	cursor: pointer;
 `;
 
 /**
@@ -29,15 +34,20 @@ const Container = styled.div`
 */
 class Article extends React.Component {
 	render() {
-		const { index, loading, className } = this.props;
+		const { width, height, index, loading, className } = this.props;
 
 		if (loading) {
 			return <Loading className={className}>Loading ...</Loading>;
 		}
 
 		return (
-			<Container className={className}>
-				<div>Click {index}</div>
+			<Container
+				width={width}
+				height={height}
+				onClick={() => this.props.handleClick(index)}
+				className={className}
+				>
+				<div>Click {index + 1}</div>
 			</Container>
 		);
 	}
@@ -55,13 +65,23 @@ Article.propTypes = {
 	* Article index
 	*/
 	index: PropTypes.integer,
+	/**
+	* Article width
+	*/
+	width: PropTypes.string,
+	/**
+	* Article height
+	*/
+	height: PropTypes.string,
 };
 
 /**
 * Default props
 */
 Article.defaultProps = {
-	loading: false
+	loading: false,
+	width: '10em',
+	height: '10em',
 };
 
 export default Article;

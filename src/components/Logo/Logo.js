@@ -29,7 +29,7 @@ class Logo extends React.Component {
 
 		return (
 			<Container className={className}>
-				Logo
+				<div>Logo</div>
 			</Container>
 		);
 	}
