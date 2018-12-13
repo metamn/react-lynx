@@ -25,28 +25,34 @@ class App extends Component {
 				width: '20em',
 				height: '20em',
 			}),
+			logoType: 'large',
 		};
 	}
 
 	handleClick(i) {
 		const articles = this.state.articles.slice();
+		let logoType = this.state.logoType;
 
 		articles[i] = {
 			width: (articles[i].width == '20em') ? '90vw' : '20em',
 			height: (articles[i].height == '20em') ? '90vh' : '20em'
 		}
 
+		logoType = (articles.find(article => article.width == '90vw')) ? 'small' : 'large';
+		console.log('l:' + logoType);
+
 		this.setState({
 			articles: articles,
+			logoType: logoType,
 		});
 	}
 
 	render() {
-		const {articles} = this.state;
+		const {articles, logoType} = this.state;
 
 		return (
 			<Container>
-				<Logo></Logo>
+				<Logo type={logoType}></Logo>
 				<Repeat numberOfTimes={articles.length} startAt='0'>
 					{(i) => <Article
 								width={articles[i].width}

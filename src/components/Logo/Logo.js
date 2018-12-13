@@ -14,21 +14,25 @@ const Loading = styled.div``;
 /**
 * The main container
 */
-const Container = styled.div``;
+const Container = styled.div`
+	${props => props.type == 'large' && css`
+		font-size: 3em;
+	`};
+`;
 
 /**
 * The main class
 */
 class Logo extends React.Component {
 	render() {
-		const { loading, className } = this.props;
+		const { type, loading, className } = this.props;
 
 		if (loading) {
 			return <Loading className={className}>Loading ...</Loading>;
 		}
 
 		return (
-			<Container className={className}>
+			<Container type={type} className={className}>
 				<div>Logo</div>
 			</Container>
 		);
@@ -42,14 +46,20 @@ Logo.propTypes = {
 	/**
 	* Component is loading?
 	*/
-	loading: PropTypes.bool
+	loading: PropTypes.bool,
+
+	/**
+	* Logo type
+	*/
+	type: PropTypes.string,
 };
 
 /**
 * Default props
 */
 Logo.defaultProps = {
-	loading: false
+	loading: false,
+	type: 'default',
 };
 
 export default Logo;
